@@ -4,5 +4,4 @@
     entry: validate-ci
     language: ruby
     language_version: 2.6.3
-    types: [executable, file, ruby, text]
     verbose: true
