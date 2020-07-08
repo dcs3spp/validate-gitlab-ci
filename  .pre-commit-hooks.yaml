@@ -1,0 +1,9 @@
+-   id: validate-gitlab-ci
+    name: Validate GitLab CI
+    description: This hook validates the Gitlab CI yaml file
+    entry: validate-ci
+    files: [ .gitlab-ci.yaml ]
+    language: ruby
+    language_version: 2.6.3p62
+    types: [executable, file, ruby, text]
+    verbose: true
