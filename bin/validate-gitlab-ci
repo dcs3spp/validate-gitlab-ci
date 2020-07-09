@@ -8,6 +8,15 @@ require 'yaml'
 
 
 =begin
+Define constants used in the application
+=end
+class AppConstants
+    ApiPath= '/api/v4/ci/lint'
+    EnvTokenKey = 'GITLAB_API_TOKEN'
+end
+
+
+=begin
 POST to GitLab api for linting ci yaml
 Params:
 +url+ :: Api url
@@ -18,10 +27,15 @@ Aborts with HTTP Message for all other status codes
 =end
 def call_api(url, yaml)
     uri = URI.parse(url)
-    
+
     req = Net::HTTP::Post.new(uri)
     req.content_type='application/json'
     req['Accept']='application/json'
+
+    if ENV.has_key?(AppConstants::EnvTokenKey)
+        req['Private-Token']="#{ENV[AppConstants::EnvTokenKey]}" 
+    end
+
     req.body = JSON.dump({"content" => yaml.to_json})
     
     https = Net::HTTP.new(uri.host, uri.port)
@@ -39,12 +53,12 @@ def call_api(url, yaml)
         when Net::HTTPServerError
             abort('error' => "#{response.message}: server error, try again later?")
         when Net::HTTPBadRequest
-            puts "Bad request..." + request.body
+            puts "Bad request..." + req.body
             abort("#{response.message}: bad api request?")
         when Net::HTTPNotFound
             abort("#{response.message}: api request not found?")
         else
-            puts "Failed validation\nJSON payload :: #{request.body}\nHTTP Response: #{response.message}"
+            puts "Failed validation\nJSON payload :: #{req.body}\nHTTP Response: #{response.message}"
             abort("#{response.message}: failed api request?")
     end
 end
@@ -85,6 +99,7 @@ def load_yaml(path)
     end
 end
 
+
 =begin
 Parse command line options
 Returns:
@@ -93,8 +108,10 @@ Hash containing keys: {:yaml_file,:url}
 def read_args()
     options = {}
     OptionParser.new do |opt|
+        opt.banner = 'Usage: validate-gitlab-ci [options]'
+        
         opt.on('-f', '--yaml YAML-PATH', 'Path to .gitlab-ci.yml') { |o| options[:yaml_file] = o }
-        opt.on('-l', '--url GitLab url', 'GitLab API url') { |o| options[:url] = o }
+        opt.on('-l', '--base-url GitLab url', 'GitLab API url') { |o| options[:url] = o + AppConstants::ApiPath }
     end.parse!
 
     options
@@ -104,11 +121,12 @@ end
 Load yaml to send to GitLab API for linting
 Display report of linting retrieved from api
 Returns:
-Exits with 0 upon success and 1 when errors encountered
+0 upon success and 1 when errors encountered
 =end
 def main()
     # try and parse the arguments
     options = read_args()
+
     unless !options.has_key?(:yaml_file) || !options.has_key?(:url)
          # try and load the yaml from path
         puts "Loading file #{options[:yaml_file]}"
@@ -125,7 +143,7 @@ def main()
             puts "Something went wrong parsing the json response " + response_data
         end
     else
-        abort("Missing required arguments yaml_file and url, use -h for usage")
+        abort("Missing required options --yaml and --base-url")
     end
 end
 
