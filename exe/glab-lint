@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'gitlab/lint/client'
+
+Gitlab::Lint::Client.entry(ARGV)
