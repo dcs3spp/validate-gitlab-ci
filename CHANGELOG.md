@@ -8,7 +8,7 @@
 * Evaluate response and display summary.
 * Pre-commit hook for linting Gitlab yml file staged for changes.
 
-## 0.0.1 - Refactored Project Structure - [12-07-2020]
+## 0.0.1 - Refactored Project Structure - [13-07-2020]
 
 ### Added
 * Entrypoint:
