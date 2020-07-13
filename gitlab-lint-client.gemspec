@@ -5,8 +5,8 @@ Gem::Specification.new do |spec|
   spec.version       = Gitlab::Lint::Client::VERSION
   spec.authors       = ["spears"]
   
-  spec.summary       = %q{Call GitLab API to validate CI yaml file}
-  spec.description   = %q{Call GitLab API to validate CI yaml file}
+  spec.description   = %q{A CLI and library to validate GitLab CI pipeline yaml files via the GitLab API}
+  spec.summary       = %q{Use as a standalone CLI, from within a git pre-commit hook. The repository provides a pre-commit.com hook with identifier 'validate-gitlab-ci'}
   spec.homepage      = "https://github.com/dcs3spp/validate-gitlab-ci"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.6.3")
