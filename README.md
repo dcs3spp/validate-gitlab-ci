@@ -20,8 +20,9 @@ client side git hooks.
 The author developed a Ruby CLI and library to lint GitLab yaml files containing CI 
 Pipeline specifications. Linting is performed using the GitLab API. 
 
-The gem can be found [here]() and the source code, with accompanying unit and functional tests, 
-are held within this repository. It can be installed by issuing the following command: 
+The gem is served on [rubygems.org](https://rubygems.org) as *gitlab-lint-client* and the 
+source code, with accompanying unit and functional tests, are held within this repository. 
+It can be installed by issuing the following command: 
 ```gem install gitlab-lint-client```. 
 
 Usage details are provided with the *help* option of the CLI, <kbd>glab-lint --help</kbd>
