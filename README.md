@@ -11,7 +11,7 @@ could prevent pushes containing invalid *.gitlab-ci.yml* files.
 
 Git provides, a *pre-commit* hook that runs for staged files on the local development environment.
 While use of local git hooks are not easily enforced, it is better than the alternative in this case. 
-The [pre-commit](https://pre-commit.com/) project faciliates deployment and installation of 
+The [pre-commit](https://pre-commit.com/) project facilitates deployment and installation of 
 client side git hooks. 
 
 
