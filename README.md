@@ -48,7 +48,7 @@ The author is using the gem within a client side pre-commit hook to automate Git
 ## 🔐 Usage As A Pre-Commit Hook
 
 This repository specifies a pre-commit hook in the *.pre-commit-hooks.yml* file. Developers can
-configure their GitLab repositories to use this hook by creating a *.pre-commit-config.yml* file
+configure their GitLab repositories to use this hook by creating a *.pre-commit-config.yaml* file
 in the root of their repository.
 
 ``` yaml
