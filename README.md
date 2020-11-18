@@ -71,7 +71,7 @@ the following command:
 pip install pre-commit
 ```
 
-Instruct pre-commit to download and configure the hooks defined in the *.pre-commit-config.yml* file:
+Instruct pre-commit to download and configure the hooks defined in the *.pre-commit-config.yaml* file:
 
 ``` bash
 pre-commit install
